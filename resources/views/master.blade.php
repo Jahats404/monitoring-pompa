@@ -35,7 +35,7 @@
 				<div class="container-fluid">
 					<div class="row text-muted">
 						<div class="col-8 text-start">
-							<ul class="list-inline">
+							{{-- <ul class="list-inline">
 								<li class="list-inline-item">
 									<a class="text-muted" href="#">Support</a>
 								</li>
@@ -48,11 +48,11 @@
 								<li class="list-inline-item">
 									<a class="text-muted" href="#">Contact</a>
 								</li>
-							</ul>
+							</ul> --}}
 						</div>
 						<div class="col-4 text-end">
 							<p class="mb-0">
-								&copy; 2023 - <a href="dashboard-default.html" class="text-muted">Spark</a>
+								&copy; 2025 - <a href="dashboard-default.html" class="text-muted">MONITORING PIPA</a>
 							</p>
 						</div>
 					</div>

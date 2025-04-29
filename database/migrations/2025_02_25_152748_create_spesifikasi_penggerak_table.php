@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('id_spesifikasi_penggerak')->primary()->unique();
             $table->string('type')->nullable();
             $table->string('no_series');
-            $table->string('kapasitas')->nullable();
+            $table->string('kapasitas_penggerak')->nullable();
             $table->string('ampere')->nullable();
             $table->year('tahun_pengadaan')->nullable();
             $table->string('kode_bearing_elmot')->nullable();

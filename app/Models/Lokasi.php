@@ -16,4 +16,16 @@ class Lokasi extends Model
         'id_lokasi' => 'string',
     ];
     
+    public function unit_pompa()
+    {
+        return $this->hasMany(UnitPompa::class,'lokasi_id','id_lokasi');
+    }
+    public function pemeriksaan_main_pump()
+    {
+        return $this->hasMany(PemeriksaanMainPump::class,'lokasi_id','id_lokasi');
+    }
+    public function pemeriksaan_charging_pump()
+    {
+        return $this->hasMany(PemeriksaanChargingPump::class,'lokasi_id','id_lokasi');
+    }
 }

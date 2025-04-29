@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pemeliharaan extends Model
+class StandarChargingPump extends Model
 {
     use HasFactory;
-
-    protected $primaryKey = 'id_pemeliharaan';
-    protected $table = 'pemeliharaan';
+    
+    protected $primaryKey = 'id_standar_charging_pump';
+    protected $table = 'standar_charging_pump';
     protected $guarded = [];
     protected $casts = [
-        'id_pemeliharaan' => 'string'
+        'id_standar_charging_pump' => 'string',
     ];
 
     public function user()

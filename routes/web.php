@@ -3,7 +3,11 @@
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\dashboard\DashboardController;
 use App\Http\Controllers\lokasi\AdminLokasiController;
+use App\Http\Controllers\pemeliharaan\AdminPemeliharaanController;
+use App\Http\Controllers\pemeriksaan\AdminPemeriksaanController;
 use App\Http\Controllers\pompa\AdminPompaController;
+use App\Http\Controllers\standar\AdminStandarController;
+use App\Http\Controllers\unit_pompa\AdminUnitPompaController;
 use App\Http\Controllers\user\AdminUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -59,11 +63,40 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/pompa-payloads/store',[AdminPompaController::class,'store'])->name('store.pompa');
         Route::put('/pompa-payloads/update/{id}',[AdminPompaController::class,'update'])->name('payload.pompa.update');
         Route::delete('/pompa-payloads/delete/{id}',[AdminPompaController::class,'delete'])->name('payload.pompa.delete');
+
+        // UNIT POMPA
+        Route::get('/unit-pompa',[AdminUnitPompaController::class,'index'])->name('unitpompa');
+        Route::post('/unit-pompa/store',[AdminUnitPompaController::class,'store'])->name('store.unitpompa');
+        Route::put('/unit-pompa/update/{id}',[AdminUnitPompaController::class,'update'])->name('update.unitpompa');
+        Route::delete('/unit-pompa/delete/{id}',[AdminUnitPompaController::class,'delete'])->name('delete.unitpompa');
+
+        // PEMERIKSAAN
+        // LOKASI
+        Route::get('/list-lokasi',[AdminPemeriksaanController::class,'lokasi'])->name('list.lokasi');
+        Route::get('/list-pompa/{id}',[AdminPemeriksaanController::class,'listPompaPerLokasi'])->name('list.pompa');
+        Route::get('/pemeriksaan-pompa/{id}/{tanggal}',[AdminPemeriksaanController::class,'pemeriksaan'])->name('pemeriksaan');
+        Route::get('/export-pemeriksaan',[AdminPemeriksaanController::class,'exportBulananPDF'])->name('export.pemeriksaan');
+
+        Route::post('/store/pemeriksaan/main-pump',[AdminPemeriksaanController::class,'storePemeriksaanMainPump'])->name('store.pemeriksaan.mainpump');
+        Route::post('/store/pemeriksaan/charging-pump',[AdminPemeriksaanController::class,'storePemeriksaanChargingPump'])->name('store.pemeriksaan.chargingpump');
+
+        //PEMELIHARAAN
+        Route::get('/pemeliharaan-pompa/{id}/{tanggal}',[AdminPemeliharaanController::class,'index'])->name('pemeliharaan');
+        Route::post('/store/pemeliharaan',[AdminPemeliharaanController::class,'storePemeliharaan'])->name('store.pemeliharaan');
+        Route::get('/export/pemeliharaan/{id}',[AdminPemeliharaanController::class,'exportExcel'])->name('export.pemeliharaan');
+
+        //STANDAR
+        Route::get('/daftar-standar',[AdminStandarController::class,'index'])->name('standar');
+        Route::get('/standar/main-pump',[AdminStandarController::class,'standarMainPump'])->name('standar.mainpump');
+        Route::post('/action/standar-mainpump',[AdminStandarController::class,'storeStandarMainPump'])->name('store.standar.mainpump');
+        
+        Route::get('/standar/charging-pump',[AdminStandarController::class,'standarChargingPump'])->name('standar.chargingpump');
+        Route::post('/action/standar-chargingpump',[AdminStandarController::class,'storeStandarChargingPump'])->name('store.standar.chargingpump');
     });
     
 
     Route::prefix('pertamina')->name('pertamina.')->middleware('CekUserLogin:3')->group(function () {
-
+        
     });
 
 });

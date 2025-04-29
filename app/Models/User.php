@@ -48,8 +48,24 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class, 'role_id', 'id_role');
     }
-    public function pemeriksaan()
+    public function pemeriksaan_main_pump()
     {
-        return $this->hasMany(Pemeriksaan::class,'user_id','id');
+        return $this->hasMany(PemeriksaanMainPump::class,'user_id','id');
+    }
+    public function pemeriksaan_charging_pump()
+    {
+        return $this->hasMany(PemeriksaanChargingPump::class,'user_id','id');
+    }
+    public function pemeliharaan()
+    {
+        return $this->hasMany(Pemeliharaan::class,'user_id','id');
+    }
+    public function standar_main_pump()
+    {
+        return $this->hasMany(StandarMainPump::class,'user_id','id');
+    }
+    public function standar_charging_pump()
+    {
+        return $this->hasMany(StandarChargingPump::class,'user_id','id');
     }
 }

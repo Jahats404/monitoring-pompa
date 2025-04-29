@@ -15,12 +15,11 @@ return new class extends Migration
             $table->string('id_unit_pompa')->primary()->unique();
             $table->string('jenis_pompa');
             $table->string('jalur')->nullable();
-            $table->string('unit_pompa')->nullable();
 
             $table->string('pompa_id');
-            $table->foreign('pompa_id')->references('id_pompa')->on('pompa');
+            $table->foreign('pompa_id')->references('id_pompa')->on('pompa')->cascadeOnDelete();
             $table->string('lokasi_id');
-            $table->foreign('lokasi_id')->references('id_lokasi')->on('lokasi');
+            $table->foreign('lokasi_id')->references('id_lokasi')->on('lokasi')->cascadeOnDelete();
             $table->timestamps();
         });
     }

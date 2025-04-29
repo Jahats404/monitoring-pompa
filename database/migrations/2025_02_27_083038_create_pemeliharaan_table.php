@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('pemeliharaan', function (Blueprint $table) {
             $table->string('id_pemeliharaan')->primary()->unique();
             $table->date('tanggal_pemeliharaan');
-            $table->text('uraian_pemeliharaan');
+            $table->unsignedBigInteger('user_id');
+            $table->text('uraian_pemeliharaan')->nullable();
             $table->text('keterangan')->nullable();
 
-            $table->string('pompa_id');
-            $table->foreign('pompa_id')->references('id_pompa')->on('pompa');
-            $table->string('lokasi_id');
-            $table->foreign('lokasi_id')->references('id_lokasi')->on('lokasi');
+            $table->string('unit_pompa_id');
+            $table->foreign('unit_pompa_id')->references('id_unit_pompa')->on('unit_pompa');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pemeliharaan extends Model
+class PemeriksaanMainPump extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id_pemeliharaan';
-    protected $table = 'pemeliharaan';
+    protected $primaryKey = 'id_pemeriksaan_main_pump';
+    protected $table = 'pemeriksaan_main_pump';
     protected $guarded = [];
     protected $casts = [
-        'id_pemeliharaan' => 'string'
+        'id_pemeriksaan_main_pump' => 'string',
     ];
 
     public function user()
@@ -23,5 +23,9 @@ class Pemeliharaan extends Model
     public function unit_pompa()
     {
         return $this->belongsTo(UnitPompa::class,'unit_pompa_id','id_unit_pompa');
+    }
+    public function lokasi()
+    {
+        return $this->belongsTo(Lokasi::class,'lokasi_id','id_lokasi');
     }
 }

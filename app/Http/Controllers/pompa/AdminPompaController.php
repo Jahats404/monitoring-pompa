@@ -45,6 +45,7 @@ class AdminPompaController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate(Validasi::$rules,Validasi::$messages);
 
         // INSERT POMPA

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('brand');
             $table->string('kode_bearing_pompa')->nullable();
             $table->string('jenis');
-            $table->string('kapasitas');
+            $table->string('kapasitas_pompa');
 
             $table->string('pompa_id');
             $table->foreign('pompa_id')->references('id_pompa')->on('pompa')->cascadeOnDelete();
