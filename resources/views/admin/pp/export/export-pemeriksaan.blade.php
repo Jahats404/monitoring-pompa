@@ -55,6 +55,14 @@
         .page-break {
             page-break-after: always;
         }
+        .weekend {
+            background-color: #d0e7ff; /* Biru muda */
+        }
+        canvas {
+            width: 100% !important;
+            max-height: 300px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -67,10 +75,15 @@
             @endphp
 
             @foreach($fieldChunks as $index => $chunk)
+                <br>
+                <br>
+                <br>
+                <br>
                 <h4 align="center">
                     HASIL MONITORING POMPA {{ $data->first()->unit_pompa->pompa->deskripsi_pompa }}, {{ $data->first()->lokasi->nama_lokasi }}<br>
                     Bulan {{ $carbon->translatedFormat('F Y') }}
                 </h4>
+                <canvas id="chart-{{ $unitId }}-{{ $index }}" height="100"></canvas>
                 <table>
                     <thead>
                         <tr>
@@ -80,7 +93,13 @@
                         <tr><th colspan="{{ $jumlahHari }}">TANGGAL:</th></tr>
                         <tr>
                             @foreach ($headers as $tanggal)
-                                <th>{{ \Carbon\Carbon::parse($tanggal)->day }}</th>
+                                @php
+                                    $dayName = \Carbon\Carbon::parse($tanggal)->locale('id')->dayName;
+                                    $isWeekend = in_array($dayName, ['Sabtu', 'Minggu']);
+                                @endphp
+                                <th class="{{ $isWeekend ? 'weekend' : '' }}">
+                                    {{ \Carbon\Carbon::parse($tanggal)->day }}
+                                </th>
                             @endforeach
                         </tr>
                     </thead>
@@ -90,9 +109,12 @@
                                 <td>{{ $label }}</td>
                                 @foreach ($headers as $tanggal)
                                     @php
+                                        $carbonDate = \Carbon\Carbon::parse($tanggal);
+                                        $dayName = $carbonDate->locale('id')->dayName;
+                                        $isWeekend = in_array($dayName, ['Sabtu', 'Minggu']);
                                         $value = $data->firstWhere('tanggal_pemeriksaan', $tanggal)?->$field;
                                     @endphp
-                                    <td>{{ $value ?? '-' }}</td>
+                                    <td class="{{ $isWeekend ? 'weekend' : '' }}">{{ $value ?? '-' }}</td>
                                 @endforeach
                             </tr>
                         @endforeach
@@ -119,6 +141,7 @@
                     HASIL MONITORING POMPA {{ $data->first()->unit_pompa->pompa->deskripsi_pompa }}, {{ $data->first()->lokasi->nama_lokasi }}<br>
                     Bulan {{ $carbon->translatedFormat('F Y') }}
                 </h4>
+                <canvas id="chart-{{ $unitId }}-{{ $index }}" height="100"></canvas>
                 <table>
                     <thead>
                         <tr>
@@ -128,7 +151,13 @@
                         <tr><th colspan="{{ $jumlahHari }}">TANGGAL:</th></tr>
                         <tr>
                             @foreach ($headers as $tanggal)
-                                <th>{{ \Carbon\Carbon::parse($tanggal)->day }}</th>
+                                @php
+                                    $dayName = \Carbon\Carbon::parse($tanggal)->locale('id')->dayName;
+                                    $isWeekend = in_array($dayName, ['Sabtu', 'Minggu']);
+                                @endphp
+                                <th class="{{ $isWeekend ? 'weekend' : '' }}">
+                                    {{ \Carbon\Carbon::parse($tanggal)->day }}
+                                </th>
                             @endforeach
                         </tr>
                     </thead>
@@ -138,9 +167,12 @@
                                 <td>{{ $label }}</td>
                                 @foreach ($headers as $tanggal)
                                     @php
+                                        $carbonDate = \Carbon\Carbon::parse($tanggal);
+                                        $dayName = $carbonDate->locale('id')->dayName;
+                                        $isWeekend = in_array($dayName, ['Sabtu', 'Minggu']);
                                         $value = $data->firstWhere('tanggal_pemeriksaan', $tanggal)?->$field;
                                     @endphp
-                                    <td>{{ $value ?? '-' }}</td>
+                                    <td class="{{ $isWeekend ? 'weekend' : '' }}">{{ $value ?? '-' }}</td>
                                 @endforeach
                             </tr>
                         @endforeach
@@ -158,3 +190,111 @@
 </body>
 </html>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        @foreach($mainPump as $unitId => $data)
+            @php
+                $fieldChunks = collect($fieldListMainPump)->chunk(ceil(count($fieldListMainPump)/2));
+            @endphp
+            @foreach($fieldChunks as $index => $chunk)
+                const ctxMain{{ $unitId }}{{ $index }} = document.getElementById('chart-{{ $unitId }}-{{ $index }}').getContext('2d');
+                new Chart(ctxMain{{ $unitId }}{{ $index }}, {
+                    type: 'line',
+                    data: {
+                        labels: [
+                            @foreach($headers as $tanggal)
+                                "{{ \Carbon\Carbon::parse($tanggal)->format('d') }}",
+                            @endforeach
+                        ],
+                        datasets: [
+                            @foreach($chunk as $field => $label)
+                                {
+                                    label: '{{ $label }}',
+                                    data: [
+                                        @foreach($headers as $tanggal)
+                                            {{ $data->firstWhere('tanggal_pemeriksaan', $tanggal)?->$field ?? 0 }},
+                                        @endforeach
+                                    ],
+                                    borderColor: `hsl({{ rand(0, 360) }}, 70%, 50%)`,
+                                    fill: false,
+                                    spanGaps: true
+                                },
+                            @endforeach
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Grafik Pemeriksaan'
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { maxRotation: 90, minRotation: 45 }
+                            },
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            @endforeach
+        @endforeach
+
+        @foreach($chargingPump as $unitId => $data)
+            @php
+                $fieldChunks = collect($fieldListChargingPump)->chunk(ceil(count($fieldListChargingPump)/2));
+            @endphp
+            @foreach($fieldChunks as $index => $chunk)
+                const ctxCharging{{ $unitId }}{{ $index }} = document.getElementById('chart-{{ $unitId }}-{{ $index }}').getContext('2d');
+                new Chart(ctxCharging{{ $unitId }}{{ $index }}, {
+                    type: 'line',
+                    data: {
+                        labels: [
+                            @foreach($headers as $tanggal)
+                                "{{ \Carbon\Carbon::parse($tanggal)->format('d') }}",
+                            @endforeach
+                        ],
+                        datasets: [
+                            @foreach($chunk as $field => $label)
+                                {
+                                    label: '{{ $label }}',
+                                    data: [
+                                        @foreach($headers as $tanggal)
+                                            {{ $data->firstWhere('tanggal_pemeriksaan', $tanggal)?->$field ?? 0 }},
+                                        @endforeach
+                                    ],
+                                    borderColor: `hsl({{ rand(0, 360) }}, 70%, 50%)`,
+                                    fill: false,
+                                    spanGaps: true
+                                },
+                            @endforeach
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Grafik Pemeriksaan'
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { maxRotation: 90, minRotation: 45 }
+                            },
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            @endforeach
+        @endforeach
+    });
+</script>

@@ -62,9 +62,9 @@
 										<div class="mb-3">
 											<label>Password</label>
 											<input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password" required />
-											<small>
+											{{-- <small>
 												<a href="pages-reset-password.html">Forgot password?</a>
-											</small>
+											</small> --}}
 										</div>
 										<div>
 										</div>

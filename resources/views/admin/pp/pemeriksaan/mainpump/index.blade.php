@@ -717,8 +717,9 @@
                         </div>
                         {{-- Footer --}}
                         <div class="card-footer">
-                            {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button> --}}
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            @if (Auth::user()->role_id == '1')
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            @endif
                         </div>
                     </form>
                 </div>
@@ -752,7 +753,7 @@
             const unitPompaId = "{{ $idUnitPompa }}";
     
             if (tanggal) {
-                const url = `/admin/pemeriksaan-pompa/${unitPompaId}/${tanggal}`;
+                const url = `/adm/pemeriksaan-pompa/${unitPompaId}/${tanggal}`;
                 window.location.href = url;
             } else {
                 alert('Silakan pilih tanggal terlebih dahulu.');

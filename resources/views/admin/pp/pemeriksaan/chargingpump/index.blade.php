@@ -419,8 +419,9 @@
                         </div>
                         {{-- Footer --}}
                         <div class="card-footer">
-                            {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button> --}}
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            @if (Auth::user()->role_id == '1')
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            @endif
                         </div>
                     </form>
                 </div>

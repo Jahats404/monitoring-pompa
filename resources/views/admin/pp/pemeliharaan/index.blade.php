@@ -4,11 +4,17 @@
         <h1 class="header-title">
             Pemeriksaan Pompa {{ $unitPompa->pompa->deskripsi_pompa }}
         </h1>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">{{ $unitPompa->jenis_pompa }}</li>
-            </ol>
-        </nav>
+        <div class="d-flex align-items-center justify-content-between">
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">{{ $unitPompa->jenis_pompa }}</li>
+                </ol>
+            </nav>
+            <a href="{{ route('admin.list.pompa', $idLokasi) }}" class="btn btn-outline-success">
+                <i class="fas fa-fw fa-arrow-alt-circle-left"></i> Kembali
+            </a>
+        </div>
     </div>
 
     <style>
@@ -18,6 +24,8 @@
     </style>
     
     <div class="row">
+        @if (Auth::user()->role_id == '1')
+            
         <div class="col-12 col-md-5">
 
             <div class="card">
@@ -42,11 +50,6 @@
                             
                         </form>
                     </div>
-                
-                    {{-- Tombol Kembali --}}
-                    <a href="{{ route('admin.list.pompa', $idLokasi) }}" class="btn btn-outline-secondary btn-sm">
-                        <i class="fas fa-fw fa-arrow-alt-circle-left"></i> Kembali
-                    </a>
                 </div>
                 
 
@@ -76,7 +79,6 @@
                 
                         {{-- Footer --}}
                         <div class="card-footer">
-                            {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button> --}}
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>
@@ -85,6 +87,40 @@
             </div>
         </div>
         <div class="col-12 col-md-7">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h5 class="card-title mb-0">Daftar Seluruh Pemeliharaan Pompa {{ $unitPompa->pompa->deskripsi_pompa }}</h5>
+                    @if (Auth::user()->role_id == '2' || Auth::user()->role_id == '3')
+                    <a href="{{ route('admin.export.pemeliharaan', ['id' => $idUnitPompa]) }}" class="btn btn-outline-primary btn-sm d-flex align-items-center gap-1"><i class="align-middle me-1 fas fa-fw fa-file-excel"></i>Export</a>
+                    @endif
+                </div>
+
+                <div class="card-body">
+                    <table id="datatables-pemeliharaan" class="table table-striped table-bordered table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;">NO</th>
+                                <th style="text-align: center;">TANGGAL</th>
+                                <th style="text-align: center;">URAIAN PEMELIHARAAN</th>
+                                <th style="text-align: center;">KETERANGAN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($pemeliharaanAll as $item)
+                                <tr class="text-center">
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->tanggal_pemeliharaan }}</td>
+                                    <td>{{ $item->uraian_pemeliharaan }}</td>
+                                    <td>{{ $item->keterangan }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        @else
+        <div class="col-12 col-md-12">
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5 class="card-title mb-0">Daftar Seluruh Pemeliharaan Pompa {{ $unitPompa->pompa->deskripsi_pompa }}</h5>
@@ -115,6 +151,7 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
 
 

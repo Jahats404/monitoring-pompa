@@ -22,6 +22,7 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5 class="card-title mb-0">Daftar Pompa {{ $lokasi->nama_lokasi }}</h5>
+                    @if (Auth::user()->role_id == '2' || Auth::user()->role_id == '3')
                     <div class="d-flex justifiy-content-center">
                         <form method="get" action="{{ route('admin.export.pemeriksaan') }}" class="d-flex align-items-center gap-2" target="_blank">
                             <input type="month" name="bulan" class="form-control" required>
@@ -33,6 +34,7 @@
                         </form>
                         <a href="{{ route('admin.list.lokasi') }}" class="btn btn-outline-secondary btn-sm"><i class="fas fa-fw fa-arrow-alt-circle-left"></i> Kembali</a>
                     </div>
+                    @endif
                 </div>
 
                 <div class="card-body">

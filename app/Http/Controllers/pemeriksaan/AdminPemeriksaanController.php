@@ -179,14 +179,19 @@ class AdminPemeriksaanController extends Controller
             ->get()
             ->groupBy('unit_pompa_id');
 
-            // dd($mainPump);
-
-        return PDF::loadView('admin.pp.export.export-pemeriksaan', [
+        return view('admin.pp.export.export-pemeriksaan',[
             'bulan' => $bulan,
             'jumlahHari' => $jumlahHari,
             'mainPump' => $mainPump,
             'chargingPump' => $chargingPump,
-        ])->setPaper('a4', 'landscape')->stream("laporan-pemeriksaan-pompa-$bulan.pdf");
+        ]);
+
+        // return PDF::loadView('admin.pp.export.export-pemeriksaan', [
+        //     'bulan' => $bulan,
+        //     'jumlahHari' => $jumlahHari,
+        //     'mainPump' => $mainPump,
+        //     'chargingPump' => $chargingPump,
+        // ])->setPaper('a4', 'landscape')->stream("laporan-pemeriksaan-pompa-$bulan.pdf");
     }
 
 }

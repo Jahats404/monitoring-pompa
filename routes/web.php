@@ -38,10 +38,10 @@ Route::middleware(['auth'])->group(function () {
     
     
     Route::prefix('teknisi')->name('teknisi.')->middleware('CekUserLogin:1')->group(function () {
-        
+        Route::get('/dashboard', [DashboardController::class, 'dashboardTeknisi'])->name('dashboard');
     });
 
-    Route::prefix('admin')->name('admin.')->middleware('CekUserLogin:2')->group(function () {
+    Route::prefix('adm')->name('admin.')->middleware('CekUserLogin:1,2,3')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'dashboardAdmin'])->name('dashboard');
         
         // PENGGUNA
@@ -96,7 +96,7 @@ Route::middleware(['auth'])->group(function () {
     
 
     Route::prefix('pertamina')->name('pertamina.')->middleware('CekUserLogin:3')->group(function () {
-        
+        Route::get('/dashboard', [DashboardController::class, 'dashboardPertamina'])->name('dashboard');
     });
 
 });

@@ -17,7 +17,9 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5 class="card-title mb-0">Daftar Lokasi</h5>
+                    @if (Auth::user()->role_id == '2')
                     <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalTambahLokasi">Tambah Lokasi</button>
+                    @endif
                 </div>
 
                 {{-- MODAL TAMBAH LOKASI --}}
@@ -65,7 +67,9 @@
                                 <th style="text-align: center;">NO</th>
                                 <th style="text-align: center;">NAMA LOKASI</th>
                                 <th style="text-align: center;">ALAMAT LOKASI</th>
-                                <th style="text-align: center;">AKSI</th>
+                                @if (Auth::user()->role_id == '2')
+                                    <th style="text-align: center;">AKSI</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -74,6 +78,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->nama_lokasi }}</td>
                                     <td>{{ $item->alamat_lokasi }}</td>
+                                    @if (Auth::user()->role_id == '2')
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
                                             <!-- Tombol Edit -->
@@ -91,6 +96,7 @@
                                             </form>
                                         </div>
                                     </td>
+                                    @endif
                                 </tr>
 
                                 {{-- SweetAlert Delete --}}

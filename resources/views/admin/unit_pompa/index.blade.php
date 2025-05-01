@@ -23,7 +23,9 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5 class="card-title mb-0">Unit Pompa</h5>
+                    @if (Auth::user()->role_id == '1' || Auth::user()->role_id == '2')
                     <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalTambahUnitPompa">Tambah Unit</button>
+                    @endif
                 </div>
 
                 {{-- MODAL TAMBAH Pengguna --}}
@@ -109,7 +111,9 @@
                                 <th style="text-align: center;">DESKRIPSI POMPA</th>
                                 <th style="text-align: center;">JENIS POMPA</th>
                                 <th style="text-align: center;">JALUR</th>
+                                @if (Auth::user()->role_id == '1' || Auth::user()->role_id == '2')
                                 <th style="text-align: center;">AKSI</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -120,6 +124,7 @@
                                     <td>{{ $item->pompa->deskripsi_pompa }}</td>
                                     <td>{{ $item->jenis_pompa }}</td>
                                     <td>{{ $item->jalur ?? '-' }}</td>
+                                    @if (Auth::user()->role_id == '1' || Auth::user()->role_id == '2')
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
                                             <!-- Tombol Edit -->
@@ -137,6 +142,7 @@
                                             </form>
                                         </div>
                                     </td>
+                                    @endif
                                 </tr>
 
                                 {{-- SweetAlert Delete --}}

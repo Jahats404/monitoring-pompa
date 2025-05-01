@@ -9,7 +9,7 @@
 	<meta name="description" content="Modern, flexible and responsive Bootstrap 5 admin &amp; dashboard template">
 	<meta name="author" content="Bootlab">
 
-	<title>Spark - Bootstrap 5 Admin &amp; Dashboard Template</title>
+	<title>Monitoring PT Tristar</title>
 
 	@include('assets.css')
 	<!-- END SETTINGS -->

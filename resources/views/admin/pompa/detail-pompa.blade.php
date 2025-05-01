@@ -101,12 +101,14 @@
 
                 <div class="mt-4 text-center">
                     <a href="{{ route('admin.payload.pompa') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Kembali</a>
+                    @if (Auth::user()->role_id == '1' || Auth::user()->role_id == '2')
                     <button data-bs-toggle="modal" data-bs-target="#modalUpdatePompa" class="btn btn-warning"><i class="fas fa-edit"></i> Edit</button>
                     <form action="{{ route('admin.payload.pompa.delete',['id' => $pompa->id_pompa]) }}" method="POST" class="d-inline delete-form">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i> Hapus</button>
                     </form>
+                    @endif
                 </div>
             </div>
         </div>
