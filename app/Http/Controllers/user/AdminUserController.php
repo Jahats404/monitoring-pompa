@@ -31,6 +31,7 @@ class AdminUserController extends Controller
                 // 'confirmed' // Password harus sama dengan konfirmasi password
             ],
             'role_id' => 'required|exists:roles,id_role',
+            // 'no_wa' => 'required|exists:roles,id_role',
         ];
         
         $messages = [
@@ -57,6 +58,7 @@ class AdminUserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+        $user->no_wa = $request->no_wa;
         $user->role_id = $request->role_id;
         $user->save();
 
@@ -119,6 +121,7 @@ class AdminUserController extends Controller
         if ($request->password) {
             $user->password = Hash::make($request->password);
         }
+        $user->no_wa = $request->no_wa;
         $user->role_id = $request->role_id;
         $user->save();
 

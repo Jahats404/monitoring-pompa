@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Models\PemeriksaanMainPump;
 use App\Models\StandarChargingPump;
 use App\Models\StandarMainPump;
+use App\Models\User;
 use Illuminate\Support\Facades\Http;
 
 class PemeriksaanHelper
@@ -46,7 +47,6 @@ class PemeriksaanHelper
             'alerts' => $alerts
         ];
         
-        $nomorTujuan = '6285878653934'; // Ganti dengan nomor WhatsApp penerima
 
         $pesanGabungan = "*📋 Laporan Pemeriksaan Main Pump*\n\n";
 
@@ -67,8 +67,14 @@ class PemeriksaanHelper
             }
         }
 
+        $users = User::where('role_id', 2)->get(); // ambil semua user dengan role admin
+
         if (str_contains($pesanGabungan, '⚠️') || str_contains($pesanGabungan, '❌')) {
-            WhatsappHelper::kirimPesan($nomorTujuan, $pesanGabungan);
+            foreach ($users as $user) {
+                if ($user->no_wa) {
+                    WhatsappHelper::kirimPesan($user->no_wa, $pesanGabungan);
+                }
+            }
         }
     }
 
@@ -109,9 +115,6 @@ class PemeriksaanHelper
             'alerts' => $alerts
         ];
 
-        // ✅ Kirim WhatsApp jika ada warning atau error
-        $nomorTujuan = '6285878653934';
-
         $pesanGabungan = "*📋 Laporan Pemeriksaan Charging Pump*\n\n";
 
         foreach ($hasilCek as $cek) {
@@ -132,8 +135,14 @@ class PemeriksaanHelper
             }
         }
 
+        $users = User::where('role_id', 2)->get(); // ambil semua user dengan role admin
+
         if (str_contains($pesanGabungan, '⚠️') || str_contains($pesanGabungan, '❌')) {
-            WhatsappHelper::kirimPesan($nomorTujuan, $pesanGabungan);
+            foreach ($users as $user) {
+                if ($user->no_wa) {
+                    WhatsappHelper::kirimPesan($user->no_wa, $pesanGabungan);
+                }
+            }
         }
     }
 

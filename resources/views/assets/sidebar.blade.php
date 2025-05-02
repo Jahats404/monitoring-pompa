@@ -18,29 +18,11 @@
             <li class="sidebar-header">
                 Main
             </li>
-            <li class="sidebar-item {{ Request::routeIs('teknisi.dashboard') || Request::is('teknisi.dashboard') || Request::is('teknisi.dashboard') ? 'active' : '' }}">
-                <a href="#dashboards" data-bs-toggle="collapse" class="sidebar-link {{ Request::routeIs('teknisi.dashboard') || Request::is('teknisi.dashboard') || Request::is('teknisi.dashboard') ? '' : 'collapsed' }}">
-                    <i class="align-middle me-2 fas fa-fw fa-home"></i> 
-                    <span class="align-middle">Dashboards</span>
+            <li class="sidebar-item {{ Request::routeIs('teknisi.dashboard*') ? 'active' : '' }}">
+                <a class="sidebar-link" href="{{ route('teknisi.dashboard') }}">
+                    <i class="align-middle me-2 fas fa-fw fa-home"></i> <span class="align-middle">Dashboard</span>
                 </a>
-                <ul id="dashboards" class="sidebar-dropdown list-unstyled collapse {{ Request::routeIs('teknisi.dashboard') || Request::is('teknisi.dashboard') || Request::is('teknisi.dashboard') ? 'show' : '' }}" data-bs-parent="#sidebar">
-                    <li class="sidebar-item {{ Request::routeIs('teknisi.dashboard') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('teknisi.dashboard') }}">Default</a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="dashboard-analytics.html">Analytics</a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="dashboard-e-commerce.html">E-commerce</a>
-                    </li>
-                </ul>
             </li>
-
-            {{-- <li class="sidebar-item {{ Request::routeIs('admin.user*') ? 'active' : '' }}">
-                <a class="sidebar-link" href="{{ route('admin.user') }}">
-                    <i class="align-middle me-2 fas fa-fw fa-user"></i> <span class="align-middle">Pengguna</span>
-                </a>
-            </li> --}}
             
             <li class="sidebar-item {{ Request::routeIs('admin.lokasi*') ? 'active' : '' }}">
                 <a data-bs-target="#lokasi" data-bs-toggle="collapse" class="sidebar-link">
@@ -93,22 +75,11 @@
             <li class="sidebar-header">
                 Main
             </li>
-            <li class="sidebar-item {{ Request::routeIs('admin.dashboard') || Request::is('admin.dashboard') || Request::is('admin.dashboard') ? 'active' : '' }}">
-                <a href="#dashboards" data-bs-toggle="collapse" class="sidebar-link {{ Request::routeIs('admin.dashboard') || Request::is('admin.dashboard') || Request::is('admin.dashboard') ? '' : 'collapsed' }}">
-                    <i class="align-middle me-2 fas fa-fw fa-home"></i> 
-                    <span class="align-middle">Dashboards</span>
+
+            <li class="sidebar-item {{ Request::routeIs('admin.dashboard*') ? 'active' : '' }}">
+                <a class="sidebar-link" href="{{ route('admin.dashboard') }}">
+                    <i class="align-middle me-2 fas fa-fw fa-home"></i> <span class="align-middle">Dashboard</span>
                 </a>
-                <ul id="dashboards" class="sidebar-dropdown list-unstyled collapse {{ Request::routeIs('admin.dashboard') || Request::is('admin.dashboard') || Request::is('admin.dashboard') ? 'show' : '' }}" data-bs-parent="#sidebar">
-                    <li class="sidebar-item {{ Request::routeIs('admin.dashboard') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('admin.dashboard') }}">Default</a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="dashboard-analytics.html">Analytics</a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="dashboard-e-commerce.html">E-commerce</a>
-                    </li>
-                </ul>
             </li>
 
             <li class="sidebar-item {{ Request::routeIs('admin.user*') ? 'active' : '' }}">
@@ -168,22 +139,10 @@
             <li class="sidebar-header">
                 Main
             </li>
-            <li class="sidebar-item {{ Request::routeIs('pertamina.dashboard') || Request::is('pertamina.dashboard') || Request::is('pertamina.dashboard') ? 'active' : '' }}">
-                <a href="#dashboards" data-bs-toggle="collapse" class="sidebar-link {{ Request::routeIs('pertamina.dashboard') || Request::is('pertamina.dashboard') || Request::is('pertamina.dashboard') ? '' : 'collapsed' }}">
-                    <i class="align-middle me-2 fas fa-fw fa-home"></i> 
-                    <span class="align-middle">Dashboards</span>
+            <li class="sidebar-item {{ Request::routeIs('pertamina.dashboard*') ? 'active' : '' }}">
+                <a class="sidebar-link" href="{{ route('pertamina.dashboard') }}">
+                    <i class="align-middle me-2 fas fa-fw fa-home"></i> <span class="align-middle">Dashboard</span>
                 </a>
-                <ul id="dashboards" class="sidebar-dropdown list-unstyled collapse {{ Request::routeIs('pertamina.dashboard') || Request::is('pertamina.dashboard') || Request::is('pertamina.dashboard') ? 'show' : '' }}" data-bs-parent="#sidebar">
-                    <li class="sidebar-item {{ Request::routeIs('pertamina.dashboard') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('pertamina.dashboard') }}">Default</a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="dashboard-analytics.html">Analytics</a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="dashboard-e-commerce.html">E-commerce</a>
-                    </li>
-                </ul>
             </li>
 
             {{-- <li class="sidebar-item {{ Request::routeIs('admin.user*') ? 'active' : '' }}">

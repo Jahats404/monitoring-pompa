@@ -50,6 +50,15 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3">
+                                        <label class="form-label">No WA <span class="text-danger">*</span></label>
+                                        <input type="text" name="no_wa" 
+                                        class="form-control @error('no_wa') is-invalid @enderror" placeholder="No WA"
+                                        value="{{ old('no_wa') }}">
+                                        @error('no_wa')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
                                         <label class="form-label">Password <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <input type="password" id="password" name="password" 
@@ -97,6 +106,7 @@
                                 <th style="text-align: center;">NO</th>
                                 <th style="text-align: center;">NAMA</th>
                                 <th style="text-align: center;">EMAIL</th>
+                                <th style="text-align: center;">NO WA</th>
                                 <th style="text-align: center;">ROLE</th>
                                 <th style="text-align: center;">AKSI</th>
                             </tr>
@@ -107,6 +117,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
+                                    <td>{{ $item->no_wa ?? '-' }}</td>
                                     <td>{{ $item->role->level }}</td>
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
@@ -181,6 +192,15 @@
                                                         class="form-control @error('email') is-invalid @enderror" placeholder="Alamat Email"
                                                         value="{{ old('email',$item->email) }}">
                                                         @error('email')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">No WA <span class="text-danger">*</span></label>
+                                                        <input type="text" name="no_wa" 
+                                                        class="form-control @error('no_wa') is-invalid @enderror" placeholder="No WA"
+                                                        value="{{ old('no_wa',$item->no_wa) }}">
+                                                        @error('no_wa')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
                                                     </div>

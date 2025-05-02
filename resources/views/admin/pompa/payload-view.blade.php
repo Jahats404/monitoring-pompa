@@ -36,26 +36,6 @@
                 </div>
             </div>
         @endforeach
-        @foreach ($pompa as $item)
-            <div class="col-md-6 mb-4 pompa-item">
-                <div class="card shadow-lg border-0 custom-card">
-                    <div class="card-header text-white bg-gradient-primary d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0 text-white">Pompa #{{ $item->id_pompa }}</h5>
-                        <span class="badge bg-light text-dark">{{ $item->jenis_cairan }}</span>
-                    </div>
-                    <div class="card-body">
-                        <p class="border-bottom pb-2"><strong>Deskripsi:</strong> {{ $item->deskripsi_pompa }}</p>
-                        <p class="border-bottom pb-2"><strong>Brand:</strong> {{ optional($item->detail_pompa)->brand ?? '-' }}</p>
-                        <p class="border-bottom pb-2"><strong>Jenis:</strong> {{ optional($item->detail_pompa)->jenis ?? '-' }}</p>
-                        <p class="border-bottom pb-2"><strong>Kapasitas Penggerak:</strong> {{ optional($item->spesifikasi_penggerak)->kapasitas ?? '-' }} KW</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a href="{{ route('admin.payload.pompa.detail', ['id' => $item->id_pompa]) }}" class="btn btn-outline-primary btn-sm">Lihat Detail</a>
-                            <small class="text-muted">Updated: {{ $item->updated_at->format('d M Y') }}</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
     </div>
 
     <style>
