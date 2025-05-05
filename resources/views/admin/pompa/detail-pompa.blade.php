@@ -131,11 +131,11 @@
                                         <form action="{{ route('admin.payload.pompa.dokumentasi', ['id' => $pompa->id_pompa]) }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             @method('put')
+                                            @if (Auth::user()->role_id == '2')
                                             <div class="mb-3">
                                                 <label class="form-label w-100">Upload Gambar</label>
                                                 <input name="file_pompa" type="file">
                                             </div>
-                                            @if (Auth::user()->role_id == '2')
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                             @endif
                                         </form>

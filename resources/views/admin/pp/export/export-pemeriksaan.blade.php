@@ -80,7 +80,17 @@
                 <br>
                 <br>
                 <h4 align="center">
-                    HASIL MONITORING POMPA {{ $data->first()->unit_pompa->pompa->deskripsi_pompa }}, {{ $data->first()->lokasi->nama_lokasi }}<br>
+                    @php
+                        $originalData = $data->first(function($item) {
+                            return !isset($item->isFilled); // ambil data asli, bukan dummy
+                        });
+                    @endphp
+
+                    @if($originalData)
+                        HASIL MONITORING POMPA {{ $originalData->unit_pompa->pompa->deskripsi_pompa }}, {{ $originalData->lokasi->nama_lokasi }}
+                    @else
+                        Data tidak tersedia
+                    @endif
                     Bulan {{ $carbon->translatedFormat('F Y') }}
                 </h4>
                 <canvas id="chart-{{ $unitId }}-{{ $index }}" height="100"></canvas>
@@ -112,13 +122,23 @@
                                         $carbonDate = \Carbon\Carbon::parse($tanggal);
                                         $dayName = $carbonDate->locale('id')->dayName;
                                         $isWeekend = in_array($dayName, ['Sabtu', 'Minggu']);
-                                        $value = $data->firstWhere('tanggal_pemeriksaan', $tanggal)?->$field;
+                        
+                                        // Ambil data per tanggal
+                                        $record = $data->firstWhere('tanggal_pemeriksaan', $tanggal);
+                                        $value = $record?->$field;
                                     @endphp
-                                    <td class="{{ $isWeekend ? 'weekend' : '' }}">{{ $value ?? '-' }}</td>
+                                    <td class="{{ $isWeekend ? 'weekend' : '' }}">
+                                        @if($record && ($record->isFilled ?? false))
+                                            -
+                                        @else
+                                            {{ $value ?? '-' }}
+                                        @endif
+                                    </td>
                                 @endforeach
                             </tr>
                         @endforeach
-                    </tbody>
+                        </tbody>
+                        
                 </table>
 
                 @if (!$loop->last)
@@ -138,7 +158,17 @@
 
             @foreach($fieldChunks as $index => $chunk)
                 <h4 align="center">
-                    HASIL MONITORING POMPA {{ $data->first()->unit_pompa->pompa->deskripsi_pompa }}, {{ $data->first()->lokasi->nama_lokasi }}<br>
+                    @php
+                        $originalData = $data->first(function($item) {
+                            return !isset($item->isFilled); // ambil data asli, bukan dummy
+                        });
+                    @endphp
+
+                    @if($originalData)
+                        HASIL MONITORING POMPA {{ $originalData->unit_pompa->pompa->deskripsi_pompa }}, {{ $originalData->lokasi->nama_lokasi }}
+                    @else
+                        Data tidak tersedia
+                    @endif
                     Bulan {{ $carbon->translatedFormat('F Y') }}
                 </h4>
                 <canvas id="chart-{{ $unitId }}-{{ $index }}" height="100"></canvas>
@@ -170,9 +200,16 @@
                                         $carbonDate = \Carbon\Carbon::parse($tanggal);
                                         $dayName = $carbonDate->locale('id')->dayName;
                                         $isWeekend = in_array($dayName, ['Sabtu', 'Minggu']);
-                                        $value = $data->firstWhere('tanggal_pemeriksaan', $tanggal)?->$field;
+                                        $record = $data->firstWhere('tanggal_pemeriksaan', $tanggal);
+                                        $value = $record?->$field;
                                     @endphp
-                                    <td class="{{ $isWeekend ? 'weekend' : '' }}">{{ $value ?? '-' }}</td>
+                                    <td class="{{ $isWeekend ? 'weekend' : '' }}">
+                                        @if($record && ($record->isFilled ?? false))
+                                            -
+                                        @else
+                                            {{ $value ?? '-' }}
+                                        @endif
+                                    </td>
                                 @endforeach
                             </tr>
                         @endforeach
