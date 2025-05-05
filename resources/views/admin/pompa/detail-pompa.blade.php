@@ -7,109 +7,145 @@
                 <h3 class="mb-0 text-white fw-bold">🔹 Detail Pompa #{{ $pompa->id_pompa }}</h3>
             </div>
             <div class="card-body">
-                <h4 class="fw-bold text-primary"><i class="fas fa-info-circle"></i> Informasi Umum</h4>
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                        <tbody>
-                            <tr>
-                                <th>ID Pompa</th>
-                                <td>{{ $pompa->id_pompa }}</td>
-                            </tr>
-                            <tr>
-                                <th>Deskripsi</th>
-                                <td>{{ $pompa->deskripsi_pompa }}</td>
-                            </tr>
-                            <tr>
-                                <th>Jenis Cairan</th>
-                                <td>{{ $pompa->jenis_cairan }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <div class="tab">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item"><a class="nav-link active" href="#tab-1" data-bs-toggle="tab" role="tab">Informasi</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#tab-2" data-bs-toggle="tab" role="tab">Dokumentasi</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab-1" role="tabpanel">
+                            <h4 class="fw-bold text-primary"><i class="fas fa-info-circle"></i> Informasi Umum</h4>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <th>ID Pompa</th>
+                                            <td>{{ $pompa->id_pompa }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Deskripsi</th>
+                                            <td>{{ $pompa->deskripsi_pompa }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Jenis Cairan</th>
+                                            <td>{{ $pompa->jenis_cairan }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                <h4 class="fw-bold text-primary mt-4"><i class="fas fa-cogs"></i> Detail Pompa</h4>
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                        <tbody>
-                            <tr>
-                                <th>Brand</th>
-                                <td>{{ optional($pompa->detail_pompa)->brand ?? '-' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Jenis</th>
-                                <td>{{ optional($pompa->detail_pompa)->jenis ?? '-' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Kapasitas Pompa</th>
-                                <td>{{ optional($pompa->detail_pompa)->kapasitas ?? '-' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Kode Bearing Pompa</th>
-                                <td>{{ optional($pompa->detail_pompa)->kode_bearing_pompa ?? '-' }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                            <h4 class="fw-bold text-primary mt-4"><i class="fas fa-cogs"></i> Detail Pompa</h4>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <th>Brand</th>
+                                            <td>{{ optional($pompa->detail_pompa)->brand ?? '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Jenis</th>
+                                            <td>{{ optional($pompa->detail_pompa)->jenis ?? '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Kapasitas Pompa</th>
+                                            <td>{{ optional($pompa->detail_pompa)->kapasitas ?? '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Kode Bearing Pompa</th>
+                                            <td>{{ optional($pompa->detail_pompa)->kode_bearing_pompa ?? '-' }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                <h4 class="fw-bold text-primary mt-4"><i class="fas fa-bolt"></i> Spesifikasi Penggerak</h4>
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                        <tbody>
-                            <tr>
-                                <th>Type</th>
-                                <td>{{ optional($pompa->spesifikasi_penggerak)->type ?? '-' }}</td>
-                            </tr>
-                            <tr>
-                                <th>No Series</th>
-                                <td>{{ optional($pompa->spesifikasi_penggerak)->no_series ?? '-' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Kapasitas Penggerak</th>
-                                <td>{{ optional($pompa->spesifikasi_penggerak)->kapasitas ?? '-' }} KW</td>
-                            </tr>
-                            <tr>
-                                <th>Ampere</th>
-                                <td>{{ optional($pompa->spesifikasi_penggerak)->ampere ?? '-' }} A</td>
-                            </tr>
-                            <tr>
-                                <th>Tahun Pengadaan</th>
-                                <td>{{ optional($pompa->spesifikasi_penggerak)->tahun_pengadaan ?? '-' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Kode Bearing Elmot</th>
-                                <td>{{ optional($pompa->spesifikasi_penggerak)->kode_bearing_elmot ?? '-' }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                            <h4 class="fw-bold text-primary mt-4"><i class="fas fa-bolt"></i> Spesifikasi Penggerak</h4>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <th>Type</th>
+                                            <td>{{ optional($pompa->spesifikasi_penggerak)->type ?? '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>No Series</th>
+                                            <td>{{ optional($pompa->spesifikasi_penggerak)->no_series ?? '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Kapasitas Penggerak</th>
+                                            <td>{{ optional($pompa->spesifikasi_penggerak)->kapasitas ?? '-' }} KW</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Ampere</th>
+                                            <td>{{ optional($pompa->spesifikasi_penggerak)->ampere ?? '-' }} A</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tahun Pengadaan</th>
+                                            <td>{{ optional($pompa->spesifikasi_penggerak)->tahun_pengadaan ?? '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Kode Bearing Elmot</th>
+                                            <td>{{ optional($pompa->spesifikasi_penggerak)->kode_bearing_elmot ?? '-' }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                <h4 class="fw-bold text-primary mt-4"><i class="fas fa-toolbox"></i> Mechanical Seal</h4>
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                        <tbody>
-                            <tr>
-                                <th>Merk</th>
-                                <td>{{ optional($pompa->mechanical_seal)->merk ?? '-' }}</td>
-                            </tr>
-                            <tr>
-                                <th>No Seri</th>
-                                <td>{{ optional($pompa->mechanical_seal)->no_seri ?? '-' }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                            <h4 class="fw-bold text-primary mt-4"><i class="fas fa-toolbox"></i> Mechanical Seal</h4>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <th>Merk</th>
+                                            <td>{{ optional($pompa->mechanical_seal)->merk ?? '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>No Seri</th>
+                                            <td>{{ optional($pompa->mechanical_seal)->no_seri ?? '-' }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                <div class="mt-4 text-center">
-                    <a href="{{ route('admin.payload.pompa') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Kembali</a>
-                    @if (Auth::user()->role_id == '1' || Auth::user()->role_id == '2')
-                    <button data-bs-toggle="modal" data-bs-target="#modalUpdatePompa" class="btn btn-warning"><i class="fas fa-edit"></i> Edit</button>
-                    <form action="{{ route('admin.payload.pompa.delete',['id' => $pompa->id_pompa]) }}" method="POST" class="d-inline delete-form">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i> Hapus</button>
-                    </form>
-                    @endif
+                            <div class="mt-4 text-center">
+                                <a href="{{ route('admin.payload.pompa') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Kembali</a>
+                                @if (Auth::user()->role_id == '1' || Auth::user()->role_id == '2')
+                                <button data-bs-toggle="modal" data-bs-target="#modalUpdatePompa" class="btn btn-warning"><i class="fas fa-edit"></i> Edit</button>
+                                <form action="{{ route('admin.payload.pompa.delete',['id' => $pompa->id_pompa]) }}" method="POST" class="d-inline delete-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i> Hapus</button>
+                                </form>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab-2" role="tabpanel">
+                            <h4 class="tab-title">Dokumentasi</h4>
+                            <div class="col-12 col-xl-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        @if ($pompa->file_pompa)
+                                        <img src="{{ asset('storage/' . $pompa->file_pompa) }}" class="img-fluid rounded" alt="...">
+                                        @else
+                                        <p>Tidak ada dokumentasi!</p>
+                                        @endif
+                                        <form action="{{ route('admin.payload.pompa.dokumentasi', ['id' => $pompa->id_pompa]) }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            @method('put')
+                                            <div class="mb-3">
+                                                <label class="form-label w-100">Upload Gambar</label>
+                                                <input name="file_pompa" type="file">
+                                            </div>
+                                            @if (Auth::user()->role_id == '2')
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            @endif
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </div>

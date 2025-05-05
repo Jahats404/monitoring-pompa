@@ -30,7 +30,7 @@
                                 <h5 class="modal-title">Tambah Lokasi</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action="{{ route('admin.store.lokasi') }}" method="post">
+                            <form action="{{ route('admin.store.lokasi') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="modal-body m-3">
                                     <div class="mb-3">
@@ -47,6 +47,15 @@
                                         <textarea class="form-control @error('alamat_lokasi') is-invalid @enderror" name="alamat_lokasi"
                                         placeholder="Alamat Lokasi" rows="3">{{ old('alamat_lokasi') }}</textarea>
                                         @error('alamat_lokasi')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Dokumentasi</label>
+                                        <input type="file" name="file_lokasi" 
+                                        class="form-control @error('file_lokasi') is-invalid @enderror"
+                                        value="{{ old('file_lokasi') }}">
+                                        @error('file_lokasi')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -134,7 +143,7 @@
                                                 <h5 class="modal-title">Perbarui Lokasi</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <form action="{{ route('admin.update.lokasi',['id' => $item->id_lokasi]) }}" method="post">
+                                            <form action="{{ route('admin.update.lokasi',['id' => $item->id_lokasi]) }}" method="post" enctype="multipart/form-data">
                                                 @csrf
                                                 @method('put')
                                                 <div class="modal-body m-3">
@@ -155,6 +164,19 @@
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
                                                     </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Dokumentasi</label>
+                                                        <input type="file" name="file_lokasi" 
+                                                        class="form-control @error('file_lokasi') is-invalid @enderror"
+                                                        value="{{ old('file_lokasi') }}">
+                                                        @error('file_lokasi')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                    @if ($item->file_lokasi)
+                                                        <small>Dokumentasi saat ini.</small>
+                                                        <img src="{{ asset('storage/' . $item->file_lokasi) }}" class="img-fluid rounded" alt="...">
+                                                    @endif
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

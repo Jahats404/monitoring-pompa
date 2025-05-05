@@ -9,6 +9,7 @@ use App\Models\Pompa;
 use App\Models\SpesifikasiPenggerak;
 use App\Models\Validasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminPompaController extends Controller
 {
@@ -41,6 +42,38 @@ class AdminPompaController extends Controller
         $pompa = Pompa::find($id);
 
         return view('admin.pompa.detail-pompa',compact('pompa'));
+    }
+
+    public function dokumentasiPompa(Request $request, $id)
+    {
+        $request->validate([
+            [
+                'file_pompa' => 'nullable|image',
+            ],
+            [
+                'file_pompa.image' => 'Dokumentasi harus berupa foto.'
+            ]
+        ]);
+
+        $pompa = Pompa::find($id);
+        
+        if ($request->hasFile('file_pompa')) {
+            $file = $request->file('file_pompa');
+            // dd($id);
+            // Hapus file lama jika ada
+            if ($pompa->file_pompa) {
+                // Menghapus file lama dari storage
+                Storage::disk('public')->delete($pompa->file_pompa);
+            }
+
+            $path = 'uploads/pompa';
+
+            // Simpan file baru
+            $pompa->file_pompa = $file->store($path, 'public');
+        }
+        $pompa->save();
+
+        return redirect()->back()->with('success','Dokumentasi berhasil ditambahkan');
     }
 
     public function store(Request $request)

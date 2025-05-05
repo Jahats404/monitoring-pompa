@@ -54,7 +54,7 @@
                 
 
                 <div class="card-body">
-                    <form action="{{ route('admin.store.pemeliharaan') }}" method="POST">
+                    <form action="{{ route('admin.store.pemeliharaan') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="unit_pompa_id" value="{{ $idUnitPompa }}">
                         <input type="hidden" name="tanggal_pemeliharaan" value="{{ $tanggal }}">
@@ -73,6 +73,14 @@
                             <textarea class="form-control @error('keterangan') is-invalid @enderror" name="keterangan"
                             placeholder="Keterangan" rows="3">{{ old('keterangan',$pemeliharaan?->keterangan) }}</textarea>
                             @error('keterangan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Dokumentasi <span class="text-danger">*</span></label>
+                            <input type="file" class="form-control @error('file_pemeliharaan') is-invalid @enderror" name="file_pemeliharaan">
+                            @error('file_pemeliharaan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -103,6 +111,7 @@
                                 <th style="text-align: center;">TANGGAL</th>
                                 <th style="text-align: center;">URAIAN PEMELIHARAAN</th>
                                 <th style="text-align: center;">KETERANGAN</th>
+                                <th style="text-align: center;">AKSI</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -112,10 +121,49 @@
                                     <td>{{ $item->tanggal_pemeliharaan }}</td>
                                     <td>{{ $item->uraian_pemeliharaan }}</td>
                                     <td>{{ $item->keterangan }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalDokumentasi{{ $item->id_pemeliharaan }}">
+                                            Dokumentasi
+                                        </button>
+                                        
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+
+                    <div class="modal fade" id="modalDokumentasi{{ $item->id_pemeliharaan }}" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Dokumentasi</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form action="{{ route('admin.dokumentasi.pemeliharaan', ['id' => $item->id_pemeliharaan]) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('put')
+                                    <div class="modal-body m-3">
+                                        <div class="mb-3">
+                                            @if ($item->file_pemeliharaan)
+                                            <img src="{{ asset('storage/' . $item->file_pemeliharaan) }}" class="img-fluid rounded" alt="...">
+                                            @else
+                                            <p>Tidak ada Dokumentasi!</p>
+                                            @endif
+                                            <label class="form-label">Dokumentasi <span class="text-danger">*</span></label>
+                                            <input type="file" class="form-control @error('file_pemeliharaan') is-invalid @enderror" name="file_pemeliharaan">
+                                            @error('file_pemeliharaan')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -179,7 +227,7 @@
             const unitPompaId = "{{ $idUnitPompa }}";
     
             if (tanggal) {
-                const url = `/admin/pemeliharaan-pompa/${unitPompaId}/${tanggal}`;
+                const url = `/adm/pemeliharaan-pompa/${unitPompaId}/${tanggal}`;
                 window.location.href = url;
             } else {
                 alert('Silakan pilih tanggal terlebih dahulu.');

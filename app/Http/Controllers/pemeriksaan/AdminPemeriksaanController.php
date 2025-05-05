@@ -61,7 +61,9 @@ class AdminPemeriksaanController extends Controller
             ->whereDate('tanggal_pemeriksaan', Carbon::parse($tanggal))
             ->first();
 
-            return view('admin.pp.pemeriksaan.mainpump.index',compact('pemeriksaan','idLokasi','tanggal','idUnitPompa','unitPompa'));
+            $cekData = PemeriksaanMainPump::where('tanggal_pemeriksaan', $tanggal)->exists();
+
+            return view('admin.pp.pemeriksaan.mainpump.index',compact('pemeriksaan','cekData','idLokasi','tanggal','idUnitPompa','unitPompa'));
 
         } 
         //JIKA JENIS POMPA CHARGING

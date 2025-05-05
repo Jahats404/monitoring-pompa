@@ -18,5 +18,10 @@ class LokasiSeeder extends Seeder
             'nama_lokasi' => 'FT Lomanis',
             'alamat_lokasi' => 'Lomanis, Cilacap'
         ]);
+        Lokasi::create([
+            'id_lokasi' => '2',
+            'nama_lokasi' => 'KOTAWINANGUN',
+            'alamat_lokasi' => 'KOTAWINANGUN'
+        ]);
     }
 }

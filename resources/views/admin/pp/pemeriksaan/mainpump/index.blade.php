@@ -716,9 +716,17 @@
 
                         </div>
                         {{-- Footer --}}
+                        @php
+                            // $dateNow = \Carbon\Carbon::now()->format('Y-m-d');
+                            // $cekData = \App\Models\PemeriksaanMainPump::where('tanggal_pemeriksaan', $dateNow)->exists();
+                        @endphp
                         <div class="card-footer">
                             @if (Auth::user()->role_id == '1')
+                                @if ($cekData)
+                                <button type="submit" class="btn btn-primary disabled">Simpan</button>
+                                @else
                                 <button type="submit" class="btn btn-primary">Simpan</button>
+                                @endif
                             @endif
                         </div>
                     </form>

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->date('tanggal_pemeliharaan');
             $table->unsignedBigInteger('user_id');
             $table->text('uraian_pemeliharaan')->nullable();
+            $table->text('file_pemeliharaan')->nullable();
             $table->text('keterangan')->nullable();
 
             $table->string('unit_pompa_id');

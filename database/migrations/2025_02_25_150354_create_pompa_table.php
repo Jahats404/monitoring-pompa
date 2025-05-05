@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('id_pompa')->unique()->primary();
             $table->string('deskripsi_pompa');
             $table->string('jenis_cairan');
+            $table->text('file_pompa')->nullable();
             $table->timestamps();
         });
     }

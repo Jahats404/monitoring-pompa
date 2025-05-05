@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('id_lokasi')->primary()->unique();
             $table->string('nama_lokasi');
             $table->text('alamat_lokasi');
+            $table->text('file_lokasi')->nullable();
             $table->timestamps();
         });
     }

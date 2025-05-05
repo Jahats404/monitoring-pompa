@@ -20,6 +20,10 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+                <img class="card-img-top img-fluid" 
+                    src="{{ asset('storage/'. $lokasi->file_lokasi) }}" 
+                    alt="Unsplash" 
+                    style="max-height: 600px; object-fit: cover;">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5 class="card-title mb-0">Daftar Pompa {{ $lokasi->nama_lokasi }}</h5>
                     @if (Auth::user()->role_id == '2' || Auth::user()->role_id == '3')

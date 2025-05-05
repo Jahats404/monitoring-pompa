@@ -63,6 +63,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/pompa-payloads/store',[AdminPompaController::class,'store'])->name('store.pompa');
         Route::put('/pompa-payloads/update/{id}',[AdminPompaController::class,'update'])->name('payload.pompa.update');
         Route::delete('/pompa-payloads/delete/{id}',[AdminPompaController::class,'delete'])->name('payload.pompa.delete');
+        Route::put('/pompa-payloads/uplaod-dokumentasi/{id}',[AdminPompaController::class,'dokumentasiPompa'])->name('payload.pompa.dokumentasi');
 
         // UNIT POMPA
         Route::get('/unit-pompa',[AdminUnitPompaController::class,'index'])->name('unitpompa');
@@ -84,6 +85,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pemeliharaan-pompa/{id}/{tanggal}',[AdminPemeliharaanController::class,'index'])->name('pemeliharaan');
         Route::post('/store/pemeliharaan',[AdminPemeliharaanController::class,'storePemeliharaan'])->name('store.pemeliharaan');
         Route::get('/export/pemeliharaan/{id}',[AdminPemeliharaanController::class,'exportExcel'])->name('export.pemeliharaan');
+        Route::put('/dokumentasi/pemeliharaan/{id}',[AdminPemeliharaanController::class,'dokumentasiPemeliharaan'])->name('dokumentasi.pemeliharaan');
 
         //STANDAR
         Route::get('/daftar-standar',[AdminStandarController::class,'index'])->name('standar');
