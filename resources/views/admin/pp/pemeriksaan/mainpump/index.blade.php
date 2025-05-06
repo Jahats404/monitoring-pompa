@@ -727,6 +727,8 @@
                                 @else
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                                 @endif
+                            @elseif (Auth::user()->role_id == '2')
+                                <button type="submit" class="btn btn-primary disabled">Simpan</button>
                             @endif
                         </div>
                     </form>

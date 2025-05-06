@@ -4,7 +4,7 @@
             <use xlink:href="#ion-ios-pulse-strong"></use>
         </svg>
         Spark --}}
-        <img src="{{ asset('/') }}img/logo-tristar-lengkap.png" class="img-thumbnail" alt="LOGO TRISTAR">
+        <img src="{{ asset('/') }}img/frame.png" class="img-thumbnail" alt="LOGO TRISTAR">
     </a>
     <div class="sidebar-content">
         <div class="sidebar-user">

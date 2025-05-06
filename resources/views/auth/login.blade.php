@@ -6,8 +6,8 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Modern, flexible and responsive Bootstrap 5 admin &amp; dashboard template">
-	<meta name="author" content="Bootlab">
+	<meta name="description" content="Monitoring Tristar">
+	<meta name="author" content="Tristar">
 
 	<title>TRISTAR - Login</title>
 
@@ -51,7 +51,7 @@
 							<div class="card-body">
 								<div class="m-sm-4">
 									<div class="text-center">
-										<img src="{{ asset('/') }}img/logo-tristar-lengkap.png" alt="PT Tristar" class="img-fluid" width="232" height="132" />
+										<img src="{{ asset('/') }}img/frame.png" alt="PT Tristar" class="img-fluid" width="232" height="132" />
 									</div>
 									<form method="post" action="{{ route('authenticate') }}">
                                         @csrf
