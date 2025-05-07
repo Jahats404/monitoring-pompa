@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreign('unit_pompa_id')->references('id_unit_pompa')->on('unit_pompa');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
-        });
+        }); 
     }
 
     /**

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pemeriksaan_charging_pump', function (Blueprint $table) {
             $table->string('id_pemeriksaan_charging_pump')->primary()->unique();
             $table->date('tanggal_pemeriksaan');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('flow_rate')->nullable();
             $table->string('suction')->nullable();
             $table->string('discharge')->nullable();
@@ -47,12 +47,12 @@ return new class extends Migration
             $table->string('produk_pemompaan')->nullable();
 
             $table->string('unit_pompa_id');
-            $table->foreign('unit_pompa_id')->references('id_unit_pompa')->on('unit_pompa');
+            $table->foreign('unit_pompa_id')->references('id_unit_pompa')->on('unit_pompa')->cascadeOnDelete();
             
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->string('lokasi_id');
-            $table->foreign('lokasi_id')->references('id_lokasi')->on('lokasi');
+            $table->foreign('lokasi_id')->references('id_lokasi')->on('lokasi')->cascadeOnDelete();
 
             $table->timestamps();
         });

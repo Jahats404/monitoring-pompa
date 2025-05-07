@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Models\PemeriksaanChargingPump;
+use App\Models\PemeriksaanMainPump;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -135,6 +137,10 @@ class AdminUserController extends Controller
         if (!$user) {
             return redirect()->back()->with('error','Pengguna tidak ditemukan.');
         }
+        
+        PemeriksaanMainPump::where('user_id',$id)->update(['user_id' => null]);
+        PemeriksaanChargingPump::where('user_id', $id)->update(['user_id' => null]);
+        
         $user->delete();
 
         return redirect()->back()->with('success','Pengguna berhasil dihapus.');

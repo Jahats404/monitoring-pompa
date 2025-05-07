@@ -61,7 +61,9 @@ class AdminPemeriksaanController extends Controller
             ->whereDate('tanggal_pemeriksaan', Carbon::parse($tanggal))
             ->first();
 
-            $cekData = PemeriksaanMainPump::where('tanggal_pemeriksaan', $tanggal)->exists();
+            $cekData = PemeriksaanMainPump::where('unit_pompa_id', $id)
+            ->whereDate('tanggal_pemeriksaan', Carbon::parse($tanggal))
+            ->exists();
 
             return view('admin.pp.pemeriksaan.mainpump.index',compact('pemeriksaan','cekData','idLokasi','tanggal','idUnitPompa','unitPompa'));
 
@@ -72,7 +74,11 @@ class AdminPemeriksaanController extends Controller
             ->whereDate('tanggal_pemeriksaan', Carbon::parse($tanggal))
             ->first();
 
-            return view('admin.pp.pemeriksaan.chargingpump.index',compact('pemeriksaan','idLokasi','tanggal','idUnitPompa','unitPompa'));
+            $cekData = PemeriksaanChargingPump::where('unit_pompa_id', $id)
+            ->whereDate('tanggal_pemeriksaan', Carbon::parse($tanggal))
+            ->exists();
+
+            return view('admin.pp.pemeriksaan.chargingpump.index',compact('pemeriksaan','cekData','idLokasi','tanggal','idUnitPompa','unitPompa'));
         }
     }
 

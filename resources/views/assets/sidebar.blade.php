@@ -110,9 +110,9 @@
                     <li class="sidebar-item {{ Request::routeIs('admin.payload.pompa') ? 'active' : '' }}">
                         <a class="sidebar-link" href="{{ route('admin.payload.pompa') }}">Spesifikasi Pompa</a>
                     </li>
-                    {{-- <li class="sidebar-item {{ Request::routeIs('admin.unitpompa') ? 'active' : '' }}">
+                    <li class="sidebar-item {{ Request::routeIs('admin.unitpompa') ? 'active' : '' }}">
                         <a class="sidebar-link" href="{{ route('admin.unitpompa') }}">Unit Pompa</a>
-                    </li> --}}
+                    </li>
                 </ul>
             </li>
 

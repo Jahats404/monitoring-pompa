@@ -418,8 +418,17 @@
 
                         </div>
                         {{-- Footer --}}
+                        @php
+                            dd($cekData);
+                        @endphp
                         <div class="card-footer">
                             @if (Auth::user()->role_id == '1')
+                                @if ($cekData)
+                                    <button type="button" class="btn btn-primary disabled">Simpan</button>
+                                @else
+                                    <button type="button" id="btnSimpan" class="btn btn-primary">Simpan</button>
+                                @endif
+                            @elseif (Auth::user()->role_id == '2')
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             @endif
                         </div>
@@ -455,10 +464,36 @@
             const unitPompaId = "{{ $idUnitPompa }}";
     
             if (tanggal) {
-                const url = `/admin/pemeriksaan-pompa/${unitPompaId}/${tanggal}`;
+                const url = `/adm/pemeriksaan-pompa/${unitPompaId}/${tanggal}`;
                 window.location.href = url;
             } else {
                 alert('Silakan pilih tanggal terlebih dahulu.');
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const btnSimpan = document.getElementById('btnSimpan');
+            const form = btnSimpan?.closest('form');
+
+            if (btnSimpan && form) {
+                btnSimpan.addEventListener('click', function () {
+                    Swal.fire({
+                        title: 'Apakah data sudah benar?',
+                        text: "Pastikan semua data telah diisi dengan benar.",
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Ya, simpan!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit(); // Lanjut submit jika dikonfirmasi
+                        }
+                    });
+                });
             }
         });
     </script>
