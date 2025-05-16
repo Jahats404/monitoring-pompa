@@ -418,9 +418,6 @@
 
                         </div>
                         {{-- Footer --}}
-                        @php
-                            dd($cekData);
-                        @endphp
                         <div class="card-footer">
                             @if (Auth::user()->role_id == '1')
                                 @if ($cekData)

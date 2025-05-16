@@ -249,6 +249,18 @@
                 item.style.display = text.includes(filter) ? '' : 'none';
             });
         });
-</script>
+    </script>
+
+    {{-- SCRIPT DATETIME PICKER --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            $('#datetimepicker-minimum').datetimepicker({
+                format: 'YYYY', // Hanya menampilkan tahun
+                viewMode: 'years', // Memulai tampilan langsung ke pemilihan tahun
+                minDate: moment().subtract(100, 'years'), // Batas minimal tahun (opsional)
+                maxDate: moment().add(10, 'years') // Batas maksimal tahun (opsional)
+            });
+        });
+    </script>
 @include('validation.notifications')
 @endsection

@@ -77,8 +77,6 @@
             @foreach($fieldChunks as $index => $chunk)
                 <br>
                 <br>
-                <br>
-                <br>
                 <h4 align="center">
                     @php
                         $originalData = $data->first(function($item) {
@@ -139,6 +137,22 @@
                         @endforeach
                         </tbody>
                         
+                </table>
+
+                <table width="100%" style="text-align: center; margin-top: 30px; border: ;">
+                    <tr>
+                        <td style="border: none;">
+                            {{-- Mengetahui,<br> --}}
+                            <strong>PT PERTAMINA MAINTENANCE & CONSTRUCTION</strong><br><br><br><br><br><br>
+                            (________________________)
+                        </td>
+                        <td style="border: none; margin-top: -20px;">
+                            {{-- Pemeriksa,<br> --}}
+                            <strong>PT PERTAMINA PATRA NIAGA</strong><br>
+                            {{ $originalData->lokasi->nama_lokasi }}<br><br><br><br><br><br>
+                            (________________________)
+                        </td>
+                    </tr>
                 </table>
 
                 @if (!$loop->last)
@@ -214,6 +228,22 @@
                             </tr>
                         @endforeach
                     </tbody>
+                </table>
+
+                <table width="100%" style="text-align: center; margin-top: 35px; border: ;">
+                    <tr>
+                        <td style="border: none;">
+                            {{-- Mengetahui,<br> --}}
+                            <strong>PT PERTAMINA MAINTENANCE & CONSTRUCTION</strong><br><br><br><br><br><br>
+                            (________________________)
+                        </td>
+                        <td style="border: none;">
+                            {{-- Pemeriksa,<br> --}}
+                            <strong>PT PERTAMINA PATRA NIAGA</strong><br>
+                            {{ $originalData->lokasi->nama_lokasi }}<br><br><br><br><br><br>
+                            (________________________)
+                        </td>
+                    </tr>
                 </table>
 
                 @if (!$loop->last)

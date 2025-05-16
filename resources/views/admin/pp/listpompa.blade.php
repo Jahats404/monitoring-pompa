@@ -20,10 +20,12 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <img class="card-img-top img-fluid" 
-                    src="{{ asset('storage/'. $lokasi->file_lokasi) }}" 
-                    alt="Unsplash" 
-                    style="max-height: 600px; object-fit: cover;">
+                @if ($lokasi->file_lokasi)
+                    <img class="card-img-top img-fluid" 
+                        src="{{ asset('storage/'. $lokasi->file_lokasi) }}" 
+                        alt="foto lokasi" 
+                        style="max-height: 600px; object-fit: cover;">
+                @endif
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5 class="card-title mb-0">Daftar Pompa {{ $lokasi->nama_lokasi }}</h5>
                     <div class="d-flex justifiy-content-center">
