@@ -52,7 +52,7 @@ class AdminPemeriksaanController extends Controller
     public function pemeriksaan($id, $tanggal)
     {
         $unitPompa = UnitPompa::find($id);
-        $idLokasi = UnitPompa::find($id)->first()->lokasi_id;
+        $idLokasi = UnitPompa::find($id)->lokasi_id;
         $idUnitPompa = $id;
 
         //JIKA JENIS POMPA MAIN
@@ -218,6 +218,8 @@ class AdminPemeriksaanController extends Controller
             ->orderBy('tanggal_pemeriksaan')
             ->get()
             ->groupBy('unit_pompa_id');
+
+        // dd($mainPump);
 
         $chargingPump = PemeriksaanChargingPump::where('lokasi_id', $lokasiId)
             ->whereYear('tanggal_pemeriksaan', $carbon->year)
